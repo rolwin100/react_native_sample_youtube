@@ -1,0 +1,2 @@
+export const apiKey= 'AIzaSyCvX89t2JqEsUsVut9eUlhYlMaChNHT_2o'
+export const apiUrl = `https://content.googleapis.com/youtube/v3/search?maxResults=25&part=snippet&regionCode=US&channelId=UC56gTxNs4f9xZ7Pa2i5xNzg&type=video&key=${apiKey}`

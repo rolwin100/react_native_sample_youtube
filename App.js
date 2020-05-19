@@ -1,19 +1,37 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+import {
+  all, fork,
+} from 'redux-saga/effects';
 
-export default function App() {
+import videosReducer from './screens/Home/reducer';
+import homeSaga from './screens/Home/saga'
+
+import Navigation from './navigation'
+
+
+const sagaMiddleware = createSagaMiddleware();
+const middleware = applyMiddleware(sagaMiddleware);
+
+const rootReducer = combineReducers({ videosReducer });
+
+const store = createStore(rootReducer, middleware);
+
+const rootSagas = function* root() {
+  yield all([
+    fork(homeSaga)
+  ]);
+}
+sagaMiddleware.run(rootSagas);
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <Provider store={store}>
+      <Navigation/>
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
