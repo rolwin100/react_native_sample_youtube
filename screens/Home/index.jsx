@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import React,{ useEffect } from 'react';
-import { SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import VideoCard from '../../components/VideoCard'
+import { FlatGrid } from 'react-native-super-grid';
 import { getVideos } from './action';
 
 const HomeScreen = (props) => {
@@ -12,20 +13,22 @@ const HomeScreen = (props) => {
   }, []);
     return (
         <SafeAreaView style={{flex:1}}>
-          {videos && <FlatList
-            data={videos}
-            renderItem={(val) => 
+          <FlatGrid
+            itemDimension={400}
+            items={videos}
+            style={{ marginTop:0, flex: 1}}
+            spacing={0}
+            renderItem={( val) => (
               <VideoCard 
-                videoId={val.item.id.videoId}
-                thumbnail={val.item.snippet.thumbnails.high.url}
-                title={val.item.snippet.title}
-                description={val.item.snippet.description}
-                channelTitle={val.item.snippet.channelTitle}
-                published={val.item.snippet.publishedAt}
-              />
-          }
-            keyExtractor={item => item.id.videoId }
-          /> }
+                    videoId={val.item.id.videoId}
+                    thumbnail={val.item.snippet.thumbnails.high.url}
+                    title={val.item.snippet.title}
+                    description={val.item.snippet.description}
+                    channelTitle={val.item.snippet.channelTitle}
+                    published={val.item.snippet.publishedAt}
+                  />
+            )}
+          />
         </SafeAreaView>
     );
 }
