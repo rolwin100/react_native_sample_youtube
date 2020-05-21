@@ -13,7 +13,7 @@ const HomeScreen = (props) => {
   }, []);
     return (
         <SafeAreaView style={{flex:1}}>
-          <FlatGrid
+          {videos && <FlatGrid
             itemDimension={400}
             items={videos}
             style={{ marginTop:0, flex: 1}}
@@ -28,7 +28,7 @@ const HomeScreen = (props) => {
                     published={val.item.snippet.publishedAt}
                   />
             )}
-          />
+          />}
         </SafeAreaView>
     );
 }

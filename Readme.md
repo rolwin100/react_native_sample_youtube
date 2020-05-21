@@ -25,4 +25,4 @@ npm start -- --reset-cache
 yarn start -- --reset-cache
 ```
 
-## Note: code is compatible for android and ios mobile devices as of now
+## Note: code is compatible for android, ios and web platform.
